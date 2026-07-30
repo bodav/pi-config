@@ -189,9 +189,9 @@ export default function llamacppMetricsExtension(pi: ExtensionAPI) {
 	}
 
 	async function refresh(ctx: any) {
+		if (!ctx?.hasUI) return;
 		const modelId = ctx?.model?.id;
 		const m = await fetchMetrics(modelId);
-		if (!ctx?.hasUI) return;
 		if (m === null) {
 			if (!warnedFetch) {
 				warnedFetch = true;
