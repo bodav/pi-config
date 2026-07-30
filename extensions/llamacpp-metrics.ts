@@ -189,7 +189,7 @@ export default function llamacppMetricsExtension(pi: ExtensionAPI) {
 	}
 
 	async function refresh(ctx: any) {
-		const modelId = ctx?.model?.provider === TARGET_PROVIDER ? ctx.model.id : undefined;
+		const modelId = ctx?.model?.id;
 		const m = await fetchMetrics(modelId);
 		if (!ctx?.hasUI) return;
 		if (m === null) {
@@ -270,7 +270,7 @@ export default function llamacppMetricsExtension(pi: ExtensionAPI) {
 		handler: async (args, ctx) => {
 			if (!metricsUrl) resolveEndpoint(ctx);
 			const arg = args.trim().toLowerCase();
-			const modelId = ctx?.model?.provider === TARGET_PROVIDER ? ctx.model.id : undefined;
+			const modelId = ctx?.model?.id;
 
 			if (arg === "on") {
 				enabled = true;
