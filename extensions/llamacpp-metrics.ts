@@ -7,9 +7,8 @@
  * llamacpp-reasoning-mode.ts.
  *
  * Display:
- *   - A one-line footer status (ctx.ui.setStatus) with the headline numbers:
+ *   - A one-line status (ctx.ui.setStatus) with the headline numbers:
  *     generation tok/s, prompt tok/s, requests currently processing.
- *   - A multi-line widget above the editor (ctx.ui.setWidget) with the fuller
  *     breakdown (throughput, totals, decode/slot stats, KV cache if exposed).
  *
  * The poller only runs while a llama.cpp request is in flight: it starts on
@@ -204,7 +203,6 @@ export default function llamacppMetricsExtension(pi: ExtensionAPI) {
 		}
 		warnedFetch = false;
 		ctx.ui.setStatus(STATUS_KEY, statusLine(m));
-		ctx.ui.setWidget(STATUS_KEY, widgetLines(m));
 	}
 
 	function startPolling(ctx: any) {
@@ -226,7 +224,6 @@ export default function llamacppMetricsExtension(pi: ExtensionAPI) {
 	function clearDisplay(ctx: any) {
 		if (ctx?.hasUI) {
 			ctx.ui.setStatus(STATUS_KEY, "");
-			ctx.ui.setWidget(STATUS_KEY, []);
 		}
 	}
 
